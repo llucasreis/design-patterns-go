@@ -3,24 +3,30 @@ package main
 import (
 	"fmt"
 
-	"github.com/llucasreis/design-patterns-go/builder"
-	"github.com/llucasreis/design-patterns-go/factory"
+	"github.com/llucasreis/design-patterns-go/prototype"
 )
 
 func main() {
 	// Builder
 
-	builder.RunBuilderSimple()
-	builder.RunBuilderMultiple()
-	builder.RunBuilderParameter()
-	builder.RunBuilderFunctional()
+	// builder.RunBuilderSimple()
+	// builder.RunBuilderMultiple()
+	// builder.RunBuilderParameter()
+	// builder.RunBuilderFunctional()
+
+	// fmt.Println("-----------------")
+
+	// // Factory
+
+	// factory.RunFunction()
+	// factory.RunInterface()
+	// factory.RunGenerator()
 
 	fmt.Println("-----------------")
 
-	// Factory
+	// Prototype
 
-	factory.RunFunction()
-	factory.RunInterface()
-	factory.RunGenerator()
-
+	prototype.RunCopy()
+	prototype.RunSerialization()
+	prototype.RunFactory()
 }
