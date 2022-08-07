@@ -10,12 +10,32 @@ import (
 
 const dataPath = "./internal/capitals.txt"
 
+type Database interface {
+	GetPopulation(name string) int
+}
+
 type singletonDatabase struct {
+	capitals map[string]int
+}
+
+type dummyDatabase struct {
 	capitals map[string]int
 }
 
 func (db *singletonDatabase) GetPopulation(name string) int {
 	return db.capitals[name]
+}
+
+func (db *dummyDatabase) GetPopulation(name string) int {
+	return db.capitals[name]
+}
+
+func GetTotalPopulation(db Database, cities []string) int {
+	result := 0
+	for _, city := range cities {
+		result += db.GetPopulation(city)
+	}
+	return result
 }
 
 var once sync.Once
@@ -31,6 +51,17 @@ func GetSingletonDatabase() *singletonDatabase {
 		instance = &db
 	})
 	return instance
+}
+
+func GetDummyDatabase() *dummyDatabase {
+	db := dummyDatabase{}
+	db.capitals = map[string]int{
+		"Seoul": 5000000,
+		"Tokyo": 2000000,
+		"Delhi": 10000000,
+	}
+
+	return &db
 }
 
 func readData(path string) (map[string]int, error) {
