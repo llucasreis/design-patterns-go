@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/llucasreis/design-patterns-go/chain_of_responsability/internal"
+	"github.com/llucasreis/design-patterns-go/chain_of_responsibility/internal"
 )
 
 func main() {
