@@ -30,8 +30,15 @@ func (p *Person2) SetAge(age int) {
 	if age == p.age {
 		return
 	}
+
+	oldCanVote := p.CanVote()
+
 	p.age = age
 	p.Fire(PropertyChange{"age", age})
+
+	if oldCanVote != p.CanVote() {
+		p.Fire(PropertyChange{"CanVote", p.CanVote()})
+	}
 }
 
 type TrafficManagement struct {
@@ -41,7 +48,7 @@ type TrafficManagement struct {
 func (t *TrafficManagement) Notify(data any) {
 	if pc, ok := data.(PropertyChange); ok && pc.Name == "age" {
 		if pc.Value.(int) >= 16 {
-			println("Congrats, you can drive now!")
+			fmt.Println("Congrats, you can drive now!")
 			t.o.Unsubscribe(t)
 		}
 	}
